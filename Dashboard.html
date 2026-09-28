@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
+        <title>Cyber security Lab</title>#the title of the website
+        <style>
+            :root {
+                --bg: #05080d; 
+                --panel: #0b1119;
+                --panel2: #101925;
+                --border: #1d3347;
+                --green: #24ffd1;
+                --green2: #0dbb7f;
+                --text: #d7e4ed;
+                --muted: #7d93a5;
+                --danger: #ff4d67;
+                --warnig: #ffb84d;
+                --blue: #4db8ff;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                margin: 0;
+                background: 
+                    radial-gradient(circle at top right, #102436 0, transparent 25%),
+                    var(--bg);
+                color: var(--text);
+                font-family: Consolas, Monaco, monospace;
+            }
+            button,
+            input {
+                font-family: inherit;
+            }
+
+            .app {
+                min-height: 100vh;
+                display: grid;
+                grid-template-columns: 270px 1fr;
+            }
+
+            .sidebar {
+                background: rgba(7, 12, 18, 0.98);
+                border-right: 1px solid var(--border);
+                padding: 22px 15px;
+                position: fixed;
+                width: 270px;
+                height: 100vh;
+                overflow-y: auto;
+            }
+
+            .logo {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+
+            .logo h1 {
+                margin: 0;
+                color: var(--green);
+                font-size: 20px;
+            }
+
+            .logo small {
+                color: var(--muted);
+            }
+
+            .nav-btn{
+                width: 100%;
+                border: 1px solid transparent;
+                background: transparent;
+                color: var(--muted);
+                padding: 13px 14px;
+                margin: 4px 0;
+                text-align: left;
+                border-radius: 7px;
+                cursor: pointer;
+                transition: 0.2s;
+            }
+
+            .nav-btn:hover,
+            .nav-btn.active {
+                color: var(--green);
+                border-color: var(--border);
+                background: var(--panel2);
+            }
+
+            .main{
+                grid-column: 2;
+                padding: 25px;
+            }
+
+            .topbar {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 25px;
+            }
+            
+            .topbar h2 {
+                margin: 0;
+            }
+
+            .status-online {
+                color: var(--green);
+            }
+
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 15px;
+            }
+
+            .card {
+                background: linear-gradient(
+                    140deg,
+                    rgba(16, 25, 37, .95),
+                    rgba(8, 14, 21, .95)
+                );
+            }
+
+            .stat-title {
+                color: var(--muted);
+            }
+
+            .stat-value {
+                font-size: 28px;
+                margin-top: 8px;
+                color: var(--green);
+            }
+            
+            .panel {
+                display: none;
+            }
+
+            .panel.active {
+                display: block;
+            }
+
+            .section-title {
+                margin-bottom: 20px;
+            }
+
+            .two-column {
+                display: grid;
+            }
+
+            .three-column{
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
+            }
+
+            .input {
+                width: 100%;
+                background: #05090d;
+                border: 1px solid var(--border);
+                color: white;
+                padding: 12px;
+                border-radius: 6px;
+                margin-bottom: 10px;
+                outline: none;
+            }
+
+            .input:focus {
+                border-color: var(--green);
+            }
+
+            .primary {
+                background: var(--green);
+                color: #002a1a;
+                border: 0;
+                padding: 11px 18px;
+                border-radius: 6px;
+                cursor: pointer;
+                font-weight: bold;
+            }
+
+            .secondary {
+                background: var(--panel2);
+                color: var(--text);
+                border: 1px solid var(--border);
+                padding: 11px 10px;
+                border-radius: 6px;
+                cursor: pointer;
+            }
+
+            .danger {
+                background: var(--danger);
+                color: white;
+                border: 0;
+                padding: 11px 18px;
+                border-radius: 6px;
+                cursor: pointer;
+            }
+            
+            .terminal {
+                background: #020406;
+                height: 330px;
+                overflow-y: auto;
+                border: 1px solid var(--border);
+                padding: 15px;
+                border-radius: 7px;
+                color: var(--green);
+                font-size: 13px;
+                line-height: 1.6;
+            }
+            
+            .event-log {
+                height: 340px;
+                overflow-y: auto;
+            }
+
+            .log-row {
+                border-bottom: 1px solid #142331;
+            }
+
+            .log-time {
+                color: var(--muted);
+            }
+
+            .good {
+                color: var(--green);
+            }
+
+            .bad {
+             color: var(--danger);   
+            }
+
+            .warn {
+                color:var(--warnig);
+            }
+
+            .info {
+                color: var(--blue);
+            }
+
+            .progress{
+                width: 100%;
+                height: 14px;
+                background: #03070a;
+                border-radius: 10px;
+                overflow: 10px;
+                border: 1px solid var(--border);
+            }
+
+            .progress-bar {
+                height: 100%;
+                width: 0%;
+                background: var(--green);
+                transition: width 0.3s;
+            }
+
+            .fake-browser {
+                border: 1px solid var(--border);
+                border-radius: 9px;
+                overflow: hidden;
+            }
+
+            .browser-top {
+                background: #18222d;
+                padding: 10px;
+                color: var(--muted);
+            }
+
+            .browser-page {
+                background: white;
+                color: #222;
+                padding: 30px;
+                min-height: 350px;
+            }
+
+            .fake-login {
+                max-width: 350px;
+                margin: auto;
+            }
+
+            .fake-login .input {
+                color: black;
+                background: white;
+                border: 1px solid #ccc;
+            }
+
+            .fake-login .button {
+                width: 100%;
+            }
+
+            .badge {
+                display: inline-block;
+                border: 1px solid var(--border);
+                padding: 6px 10px;
+                border-radius: 20px;
+                font-size: 12px;
+            }
+
+            .risk-circle {
+                width: 150px;
+                height: 150px;
+                border: 10px solid var(--green);
+                border-radius: 50%;
+                display: grid;
+                place-items: center;
+                margin: 15px auto;
+            }
+
+            .chart {
+                height: 200px;
+                
+            }
+        </style>
+    </head>
+    <body>
+
+    </body>
+</html>
